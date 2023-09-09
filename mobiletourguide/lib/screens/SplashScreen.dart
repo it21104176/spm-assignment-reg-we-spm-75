@@ -23,7 +23,7 @@ class FullScreenImageWithButton extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 // Replace 'your-image.jpg' with your image asset path or URL
-                image: AssetImage('assets/images/HomeS.jpeg'),
+                image: AssetImage('assets/images/splash.jpeg'),
                 fit: BoxFit.cover,
               ),
             ),
