@@ -11,55 +11,55 @@ class _PlacesListPageState extends State<PlacesListPage> {
   List<Place> places = [
     Place(
         name: 'Kandy',
-        image: 'assets/Kandy.jpeg',
+        image: 'assets/images/Kandy.jpeg',
         description:
         'Kandy is a large city in central Sri Lanka. It is set on a plateau surrounded by mountains, which are home to tea plantations and biodiverse rainforest.',
         services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Kandy1.jpg', 'assets/Kandy2.jpg', 'assets/Kandy3.jpeg', 'assets/Kandy4.jpeg', 'assets/Kandy5.jpg'],
+        additionalImages: ['assets/images/Kandy1.jpg', 'assets/images/Kandy2.jpg', 'assets/images/Kandy3.jpeg', 'assets/images/Kandy4.jpeg', 'assets/images/Kandy5.jpg'],
         activities : [' Visit the Temple of the Scared Tooth.', ' Ride the Kandy to Ella Train.', ' Royal Botanic Gardens of Peradeniya.', ' Walk Kandy Lake.'],
-        activityImages : ['assets/KACT1.jpg', 'assets/KACT2.jpg', 'assets/KACT3.jpg', 'assets/KACT4.jpg']
+        activityImages : ['assets/images/KACT1.jpg', 'assets/images/KACT2.jpg', 'assets/images/KACT3.jpg', 'assets/images/KACT4.jpg']
     ),
     Place(
         name: 'Sigiriya',
-        image: 'assets/Sigiriya_full.jpg',
+        image: 'assets/images/Sigiriya_full.jpg',
         description:
         'Sigiriya is an ancient rock fortress located in the northern Matale District near the town of Dambulla in the Central Province, Sri Lanka.',
         services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Sigiriya1.jpeg', 'assets/Sigiriya2.jpeg', 'assets/Sigiriya3.jpeg', 'assets/Sigiriya4.jpg', 'assets/Sigiriya5.jpeg'],
+        additionalImages: ['assets/images/Sigiriya1.jpeg', 'assets/images/Sigiriya2.jpeg', 'assets/images/Sigiriya3.jpeg', 'assets/images/Sigiriya4.jpg', 'assets/images/Sigiriya5.jpeg'],
         activities : [' Climb Lion Rock (also called Sigiriya Rock', ' Climb Pidurangala Rock','Visit the Cave Temple in Dambulla'],
-        activityImages : ['assets/SACT1.png', 'assets/SACT2.jpg', 'assets/SACT3.png']
+        activityImages : ['assets/images/SACT1.png', 'assets/images/SACT2.jpg', 'assets/images/SACT3.png']
     ),
     Place(
         name: 'Galle',
-        image: 'assets/Galle.jpeg',
+        image: 'assets/images/Galle.jpeg',
         description:
         'Galle is a city on the southwest coast of Sri Lanka. It’s known for Galle Fort, the fortified old city founded by Portuguese colonists in the 16th century.',
         services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Galle1.jpeg', 'assets/Galle2.jpeg', 'assets/Galle3.jpeg', 'assets/Galle4.jpg', 'assets/Galle5.jpeg'],
+        additionalImages: ['assets/images/Galle1.jpeg', 'assets/images/Galle2.jpeg', 'assets/images/Galle3.jpeg', 'assets/images/Galle4.jpg', 'assets/images/Galle5.jpeg'],
         activities : [' Sea Turtle Farm Galle Mahamodara', ' Galle Fort',' Old Town of Galle and its Fortifications', ' Martin Wickramasinghe Folk Museum Complex'],
-        activityImages : ['assets/GACT1.jpg', 'assets/GACT2.jpg', 'assets/GACT3.jpg', 'assets/GACT4.jpg']
+        activityImages : ['assets/images/GACT1.jpg', 'assets/images/GACT2.jpg', 'assets/images/GACT3.jpg', 'assets/images/GACT4.jpg']
 
     ),
     Place(
         name: 'Mirissa',
-        image: 'assets/Mirissa.jpeg',
+        image: 'assets/images/Mirissa.jpeg',
         description:
         'Mirissa is a small town on the south coast of Sri Lanka, located in the Matara District of the Southern Province.',
         services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Mirissa1.jpeg', 'assets/Mirissa2.jpeg', 'assets/Mirissa3.jpeg', 'assets/Mirissa5.jpg', 'assets/Mirissa4.jpg'],
+        additionalImages: ['assets/images/Mirissa1.jpeg', 'assets/images/Mirissa2.jpeg', 'assets/images/Mirissa3.jpeg', 'assets/images/Mirissa5.jpg', 'assets/images/Mirissa4.jpg'],
         activities : [' Secret Beach, Mirissa', ' Parrot Rock',' Coconut Tree Hill', 'Whale Watching, Mirissa'],
-        activityImages : ['assets/MACT1.jpg', 'assets/MACT2.jpg', 'assets/MACT3.jpg', 'assets/MACT4.jpg']
+        activityImages : ['assets/images/MACT1.jpg', 'assets/images/MACT2.jpg', 'assets/images/MACT3.jpg', 'assets/images/MACT4.jpg']
 
     ),
     Place(
         name: 'Ella Rock',
-        image: 'assets/Ella.jpeg',
+        image: 'assets/images/Ella.jpeg',
         description:
         'Ella is a small town in the Badulla District of Uva Province, Sri Lanka governed by an Urban Council.',
         services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Ella1.jpeg', 'assets/Ella2.jpeg', 'assets/Ella3.jpg', 'assets/Ella4.jpeg', 'assets/Ella5.jpeg'],
+        additionalImages: ['assets/images/Ella1.jpeg', 'assets/images/Ella2.jpeg', 'assets/images/Ella3.jpg', 'assets/images/Ella4.jpeg', 'assets/images/Ella5.jpeg'],
         activities : ['Little Adam s Peak View Point', 'Nine Arches Bridge','Ella Rock', 'Ravana Ella Falls','Ravana s Cave'],
-        activityImages : ['assets/EACT1.jpg', 'assets/EACT2.jpg', 'assets/EACT3.jpg', 'assets/EACT4.jpg','assets/EACT5.jpg']
+        activityImages : ['assets/images/EACT1.jpg', 'assets/images/EACT2.jpg', 'assets/images/EACT3.jpg', 'assets/images/EACT4.jpg','assets/images/EACT5.jpg']
 
     ),
     // Add more places as needed.
