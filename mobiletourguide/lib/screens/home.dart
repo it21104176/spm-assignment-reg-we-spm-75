@@ -102,7 +102,10 @@ class _HomeState extends State<Home> {
                     child: Column(
                       children: [
                         Image.asset(
-                          'assets/images/splash.jpeg', // Replace with the image URL
+
+                          'assets/images/Mirissa.jpeg', // Replace with the image URL
+ 
+
                           fit: BoxFit.cover,
                         ),
                         const SizedBox(height: 8), // Adjust the spacing between the image and text

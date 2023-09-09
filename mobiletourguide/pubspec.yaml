@@ -69,6 +69,57 @@ flutter:
   assets:
     - assets/images/
     - assets/images/splash.jpeg
+    - assets/images/Sigiriya.png
+    - assets/images/Sigiriya1.jpeg
+    - assets/images/Sigiriya2.jpeg
+    - assets/images/Sigiriya3.jpeg
+    - assets/images/Sigiriya4.jpg
+    - assets/images/Sigiriya5.jpeg
+    - assets/images/Ella.jpeg
+    - assets/images/Ella1.jpeg
+    - assets/images/Ella2.jpeg
+    - assets/images/Ella3.jpg
+    - assets/images/Ella4.jpeg
+    - assets/images/Ella5.jpeg
+    - assets/images/Galle.jpeg
+    - assets/images/Galle1.jpeg
+    - assets/images/Galle2.jpeg
+    - assets/images/Galle3.jpeg
+    - assets/images/Galle4.jpg
+    - assets/images/Galle5.jpeg
+    - assets/images/Mirissa.jpeg
+    - assets/images/Mirissa1.jpeg
+    - assets/images/Mirissa2.jpeg
+    - assets/images/Mirissa3.jpeg
+    - assets/images/Mirissa4.jpg
+    - assets/images/Mirissa5.jpg
+    - assets/images/Kandy.jpeg
+    - assets/images/Kandy1.jpg
+    - assets/images/Kandy2.jpg
+    - assets/images/Kandy3.jpeg
+    - assets/images/Kandy4.jpeg
+    - assets/images/Kandy5.jpg
+    - assets/images/Sigiriya_full.jpg
+    - assets/images/KACT1.jpg
+    - assets/images/KACT2.jpg
+    - assets/images/KACT3.jpg
+    - assets/images/KACT4.jpg
+    - assets/images/SACT1.png
+    - assets/images/SACT2.jpg
+    - assets/images/SACT3.png
+    - assets/images/GACT1.jpg
+    - assets/images/GACT2.jpg
+    - assets/images/GACT3.jpg
+    - assets/images/GACT4.jpg
+    - assets/images/MACT1.jpg
+    - assets/images/MACT2.jpg
+    - assets/images/MACT3.jpg
+    - assets/images/MACT4.jpg
+    - assets/images/EACT1.jpg
+    - assets/images/EACT2.jpg
+    - assets/images/EACT3.jpg
+    - assets/images/EACT4.jpg
+    - assets/images/EACT5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
