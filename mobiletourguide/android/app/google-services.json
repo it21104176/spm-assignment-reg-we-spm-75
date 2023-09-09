@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "445809103822",
-    "project_id": "mobiletourguide-b1d13",
-    "storage_bucket": "mobiletourguide-b1d13.appspot.com"
+    "project_number": "1097618524829",
+    "project_id": "tourguide-bb7a2",
+    "storage_bucket": "tourguide-bb7a2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:445809103822:android:759b40bee970c4bd81d19f",
+        "mobilesdk_app_id": "1:1097618524829:android:884505641130f8a6dd6274",
         "android_client_info": {
           "package_name": "com.example.mobiletourguide"
         }
       },
       "oauth_client": [
         {
-          "client_id": "445809103822-4mkd0k61vhc54cd7evathbu0h13ssk1l.apps.googleusercontent.com",
+          "client_id": "1097618524829-h53v0urq45ibatas8vj1ua9rmp6g9us3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAksR6LbR2MUxvvojTVr2-7KSLhVtlz3Ac"
+          "current_key": "AIzaSyA2ak9Ni7PXObWdnsJ7c8Auikv5Jd4vgCw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "445809103822-4mkd0k61vhc54cd7evathbu0h13ssk1l.apps.googleusercontent.com",
+              "client_id": "1097618524829-h53v0urq45ibatas8vj1ua9rmp6g9us3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
