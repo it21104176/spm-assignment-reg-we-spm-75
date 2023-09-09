@@ -1,5 +1,5 @@
 import 'package:mobiletourguide/models/user.dart';
-import 'package:mobiletourguide/screens/wrapper.dart';
+import 'package:mobiletourguide/screens/SplashScreen.dart';
 import 'package:mobiletourguide/services/authservice.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(
       initialData: UserModel(uid: ""),
       value: AuthService().user,
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Wrapper(),
+        home: SplashScreen(),
       ),
     );
   }
