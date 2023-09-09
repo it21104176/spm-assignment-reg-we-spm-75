@@ -70,34 +70,6 @@ class _PlacesListPageState extends State<PlacesListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Places List'),
-        actions: <Widget>[
-          // Add a PopupMenuButton widget here.
-          PopupMenuButton<String>(
-            onSelected: (String choice) {
-              // Handle menu item selection here.
-              if (choice == 'Settings') {
-                // Perform the action for the 'Settings' menu item.
-                // You can navigate to a settings page or perform any other action.
-              } else if (choice == 'About') {
-                // Perform the action for the 'About' menu item.
-                // You can navigate to an about page or show an about dialog.
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              // Define the menu items.
-              return <PopupMenuEntry<String>>[
-                PopupMenuItem<String>(
-                  value: 'Settings',
-                  child: Text('Settings'),
-                ),
-                PopupMenuItem<String>(
-                  value: 'About',
-                  child: Text('About'),
-                ),
-              ];
-            },
-          ),
-        ],
       ),
 
       body: ListView.builder(
