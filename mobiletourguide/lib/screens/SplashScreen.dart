@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
-
-import 'home/home.dart';
+import 'package:mobiletourguide/screens/wrapper.dart';
 
 
 class SplashScreen extends StatelessWidget {
@@ -25,7 +23,7 @@ class FullScreenImageWithButton extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 // Replace 'your-image.jpg' with your image asset path or URL
-                image: AssetImage('assets/images/HomeS.jpeg'),
+                image: AssetImage('assets/images/splash.jpeg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,11 +40,11 @@ class FullScreenImageWithButton extends StatelessWidget {
                     // Navigate to the Home Page when the button is pressed
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => Wrapper(),
                       ),
                     );
                   },
-                  child: Text('Get Start', style: TextStyle(fontSize: 26.0)),
+                  child: Text('Get Start...', style: TextStyle(fontSize: 26.0)),
                 ),
               ),
             ),

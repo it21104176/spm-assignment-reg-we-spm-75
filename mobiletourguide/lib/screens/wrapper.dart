@@ -1,6 +1,6 @@
 import 'package:mobiletourguide/models/user.dart';
 import 'package:mobiletourguide/screens/auth/auth.dart';
-import 'package:mobiletourguide/screens/home/home.dart';
+import 'package:mobiletourguide/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
