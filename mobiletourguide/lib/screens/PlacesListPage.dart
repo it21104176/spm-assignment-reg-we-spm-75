@@ -39,14 +39,14 @@ class _PlacesListPageState extends State<PlacesListPage> {
         additionalImages: ['assets/images/Galle1.jpeg', 'assets/images/Galle2.jpeg', 'assets/images/Galle3.jpeg', 'assets/images/Galle4.jpg', 'assets/images/Galle5.jpeg'],
         activities : [' Sea Turtle Farm Galle Mahamodara', ' Galle Fort',' Old Town of Galle and its Fortifications', ' Martin Wickramasinghe Folk Museum Complex'],
         activityImages : ['assets/images/GACT1.jpg', 'assets/images/GACT2.jpg', 'assets/images/GACT3.jpg', 'assets/images/GACT4.jpg']
-=======
-        image: 'assets/Kandy.jpeg',
-        description:
-        'Kandy is a large city in central Sri Lanka. It is set on a plateau surrounded by mountains, which are home to tea plantations and biodiverse rainforest.',
-        services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Kandy1.jpg', 'assets/Kandy2.jpg', 'assets/Kandy3.jpeg', 'assets/Kandy4.jpeg', 'assets/Kandy5.jpg'],
-        activities : [' Visit the Temple of the Scared Tooth.', ' Ride the Kandy to Ella Train.', ' Royal Botanic Gardens of Peradeniya.', ' Walk Kandy Lake.'],
-        activityImages : ['assets/KACT1.jpg', 'assets/KACT2.jpg', 'assets/KACT3.jpg', 'assets/KACT4.jpg']
+// =======
+//         image: 'assets/Kandy.jpeg',
+//         description:
+//         'Kandy is a large city in central Sri Lanka. It is set on a plateau surrounded by mountains, which are home to tea plantations and biodiverse rainforest.',
+//         services: ['Walking', 'Boating'],
+//         additionalImages: ['assets/Kandy1.jpg', 'assets/Kandy2.jpg', 'assets/Kandy3.jpeg', 'assets/Kandy4.jpeg', 'assets/Kandy5.jpg'],
+//         activities : [' Visit the Temple of the Scared Tooth.', ' Ride the Kandy to Ella Train.', ' Royal Botanic Gardens of Peradeniya.', ' Walk Kandy Lake.'],
+//         activityImages : ['assets/KACT1.jpg', 'assets/KACT2.jpg', 'assets/KACT3.jpg', 'assets/KACT4.jpg']
     ),
     Place(
         name: 'Sigiriya',
@@ -80,14 +80,14 @@ class _PlacesListPageState extends State<PlacesListPage> {
         additionalImages: ['assets/images/Mirissa1.jpeg', 'assets/images/Mirissa2.jpeg', 'assets/images/Mirissa3.jpeg', 'assets/images/Mirissa5.jpg', 'assets/images/Mirissa4.jpg'],
         activities : [' Secret Beach, Mirissa', ' Parrot Rock',' Coconut Tree Hill', 'Whale Watching, Mirissa'],
         activityImages : ['assets/images/MACT1.jpg', 'assets/images/MACT2.jpg', 'assets/images/MACT3.jpg', 'assets/images/MACT4.jpg']
-=======
-        image: 'assets/Mirissa.jpeg',
-        description:
-        'Mirissa is a small town on the south coast of Sri Lanka, located in the Matara District of the Southern Province.',
-        services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Mirissa1.jpeg', 'assets/Mirissa2.jpeg', 'assets/Mirissa3.jpeg', 'assets/Mirissa5.jpg', 'assets/Mirissa4.jpg'],
-        activities : [' Secret Beach, Mirissa', ' Parrot Rock',' Coconut Tree Hill', 'Whale Watching, Mirissa'],
-        activityImages : ['assets/MACT1.jpg', 'assets/MACT2.jpg', 'assets/MACT3.jpg', 'assets/MACT4.jpg']
+// =======
+//         image: 'assets/Mirissa.jpeg',
+//         description:
+//         'Mirissa is a small town on the south coast of Sri Lanka, located in the Matara District of the Southern Province.',
+//         services: ['Walking', 'Boating'],
+//         additionalImages: ['assets/Mirissa1.jpeg', 'assets/Mirissa2.jpeg', 'assets/Mirissa3.jpeg', 'assets/Mirissa5.jpg', 'assets/Mirissa4.jpg'],
+//         activities : [' Secret Beach, Mirissa', ' Parrot Rock',' Coconut Tree Hill', 'Whale Watching, Mirissa'],
+//         activityImages : ['assets/MACT1.jpg', 'assets/MACT2.jpg', 'assets/MACT3.jpg', 'assets/MACT4.jpg']
 
 
     ),
@@ -101,14 +101,14 @@ class _PlacesListPageState extends State<PlacesListPage> {
         additionalImages: ['assets/images/Ella1.jpeg', 'assets/images/Ella2.jpeg', 'assets/images/Ella3.jpg', 'assets/images/Ella4.jpeg', 'assets/images/Ella5.jpeg'],
         activities : ['Little Adam s Peak View Point', 'Nine Arches Bridge','Ella Rock', 'Ravana Ella Falls','Ravana s Cave'],
         activityImages : ['assets/images/EACT1.jpg', 'assets/images/EACT2.jpg', 'assets/images/EACT3.jpg', 'assets/images/EACT4.jpg','assets/images/EACT5.jpg']
-=======
-        image: 'assets/Ella.jpeg',
-        description:
-        'Ella is a small town in the Badulla District of Uva Province, Sri Lanka governed by an Urban Council.',
-        services: ['Walking', 'Boating'],
-        additionalImages: ['assets/Ella1.jpeg', 'assets/Ella2.jpeg', 'assets/Ella3.jpg', 'assets/Ella4.jpeg', 'assets/Ella5.jpeg'],
-        activities : ['Little Adam s Peak View Point', 'Nine Arches Bridge','Ella Rock', 'Ravana Ella Falls','Ravana s Cave'],
-        activityImages : ['assets/EACT1.jpg', 'assets/EACT2.jpg', 'assets/EACT3.jpg', 'assets/EACT4.jpg','assets/EACT5.jpg']
+// =======
+//         image: 'assets/Ella.jpeg',
+//         description:
+//         'Ella is a small town in the Badulla District of Uva Province, Sri Lanka governed by an Urban Council.',
+//         services: ['Walking', 'Boating'],
+//         additionalImages: ['assets/Ella1.jpeg', 'assets/Ella2.jpeg', 'assets/Ella3.jpg', 'assets/Ella4.jpeg', 'assets/Ella5.jpeg'],
+//         activities : ['Little Adam s Peak View Point', 'Nine Arches Bridge','Ella Rock', 'Ravana Ella Falls','Ravana s Cave'],
+//         activityImages : ['assets/EACT1.jpg', 'assets/EACT2.jpg', 'assets/EACT3.jpg', 'assets/EACT4.jpg','assets/EACT5.jpg']
 
 
     ),
