@@ -11,27 +11,15 @@ void main() async {
   runApp(const AddNewPlaces());
 }
 
-class AddNewPlaces extends StatelessWidget {
+
+class AddNewPlaces extends StatefulWidget {
   const AddNewPlaces({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Add New Places',
-      home: HomePage(),
-    );
-  }
+  _AddNewPlaceState createState() => _AddNewPlaceState();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class _AddNewPlaceState extends State<AddNewPlaces> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _visitedPlacesController = TextEditingController();
@@ -75,140 +63,145 @@ class _HomePageState extends State<HomePage> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                // Display selected image
-                if (_selectedImage != null) Image.file(_selectedImage!),
-                // Button to pick an image
-                ElevatedButton(
-                  onPressed: () => _pickImage(),
-                  child: const Text(
-                    'Pick Image',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30.0),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Location Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a Location name.';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    labelStyle: TextStyle(fontSize: 18),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  maxLines: 5,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a description.';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20.0),
-                TextField(
-                  controller: _visitedPlacesController,
-                  decoration: InputDecoration(
-                    labelText: 'Service in that area',
-                    labelStyle: TextStyle(fontSize: 18),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextFormField(
-                        controller: _servicesController,
-                        decoration: InputDecoration(
-                          labelText: 'More Visit Places Nearly',
-                          labelStyle: TextStyle(fontSize: 18),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 20.0),
+        return Scaffold(
+          body: Form(
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child:  SingleChildScrollView(
+                  child: Column(
+                  children: [
+                    SizedBox(height: 60.0),
+                    // Display selected image
+                    if (_selectedImage != null) Image.file(_selectedImage!),
+                    // Button to pick an image
                     ElevatedButton(
-                      onPressed: _addService,
-                      child: Text(
-                        'Add',
+                      onPressed: () => _pickImage(),
+                      child: const Text(
+                        'Pick Image',
                         style: TextStyle(
                           fontSize: 18,
                         ),
                       ),
                     ),
+                    SizedBox(height: 30.0),
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Location Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a Location name.';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: _descriptionController,
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                        labelStyle: TextStyle(fontSize: 18),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      maxLines: 5,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a description.';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20.0),
+                    TextField(
+                      controller: _visitedPlacesController,
+                      decoration: InputDecoration(
+                        labelText: 'Service in that area',
+                        labelStyle: TextStyle(fontSize: 18),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            controller: _servicesController,
+                            decoration: InputDecoration(
+                              labelText: 'More Visit Places Nearly',
+                              labelStyle: TextStyle(fontSize: 18),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 20.0),
+                        ElevatedButton(
+                          onPressed: _addService,
+                          child: Text(
+                            'Add',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Wrap(
+                      children: _services.map((service) {
+                        return Chip(
+                          label: Text(service),
+                          onDeleted: () {
+                            setState(() {
+                              _services.remove(service);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    SizedBox(height: 16.0),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      child: const Text('Create'),
+                      onPressed: () async {
+                        final String name = _nameController.text;
+                        final String description = _descriptionController.text;
+                        final String visitedPlaces = _visitedPlacesController.text;
+
+                        // Upload the image to Firebase Storage
+                        final imageUrl = await _uploadImageToStorage(_selectedImage);
+
+                        await _places.add({
+                          "description": description,
+                          "name": name,
+                          "visitedplaces": visitedPlaces,
+                          "services": _services,
+                          "imageUrl": imageUrl, // Store the image URL in Firestore
+                        });
+
+                        _nameController.text = '';
+                        _descriptionController.text = '';
+                        _visitedPlacesController.text = '';
+                        _servicesController.text = '';
+                        _services.clear();
+                        _selectedImage = null; // Clear the selected image
+                        Navigator.of(context).pop();
+                      },
+                    )
                   ],
                 ),
-                Wrap(
-                  children: _services.map((service) {
-                    return Chip(
-                      label: Text(service),
-                      onDeleted: () {
-                        setState(() {
-                          _services.remove(service);
-                        });
-                      },
-                    );
-                  }).toList(),
                 ),
-                SizedBox(height: 16.0),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  child: const Text('Create', style: TextStyle(fontSize: 22.0)),
-                  onPressed: () async {
-                    final String name = _nameController.text;
-                    final String description = _descriptionController.text;
-                    final String visitedPlaces = _visitedPlacesController.text;
-
-                    // Upload the image to Firebase Storage
-                    final imageUrl = await _uploadImageToStorage(_selectedImage);
-
-                    await _places.add({
-                      "description": description,
-                      "name": name,
-                      "visitedplaces": visitedPlaces,
-                      "services": _services,
-                      "imageUrl": imageUrl, // Store the image URL in Firestore
-                    });
-
-                    _nameController.text = '';
-                    _descriptionController.text = '';
-                    _visitedPlacesController.text = '';
-                    _servicesController.text = '';
-                    _services.clear();
-                    _selectedImage = null; // Clear the selected image
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ),
+              )
           ),
         );
       },
@@ -231,145 +224,136 @@ class _HomePageState extends State<HomePage> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext ctx) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                // Display selected image
-                if (_selectedImage != null) Image.file(_selectedImage!),
-                // Button to pick an image
-                ElevatedButton(
-                  onPressed: () => _pickImage(),
-                  child: const Text(
-                    'Pick Image',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30.0),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Location Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a Location name.';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                    labelStyle: TextStyle(fontSize: 18),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  maxLines: 5,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a description.';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 20.0),
-                TextField(
-                  controller: _visitedPlacesController,
-                  decoration: InputDecoration(
-                    labelText: 'Service in that area',
-                    labelStyle: TextStyle(fontSize: 18),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextFormField(
-                        controller: _servicesController,
-                        decoration: InputDecoration(
-                          labelText: 'More Visit Places Nearly',
-                          labelStyle: TextStyle(fontSize: 18),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+        return Scaffold(
+          body: Form(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+                child:  SingleChildScrollView(
+                  child: Column(
+                      children: [
+                        SizedBox(height: 60.0),
+                        SizedBox(height: 30.0),
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Location Name',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a Location name.';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 16.0),
+                        TextFormField(
+                          controller: _descriptionController,
+                          decoration: InputDecoration(
+                            labelText: 'Description',
+                            labelStyle: TextStyle(fontSize: 18),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          maxLines: 5,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a description.';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 20.0),
+                        TextField(
+                          controller: _visitedPlacesController,
+                          decoration: InputDecoration(
+                            labelText: 'Service in that area',
+                            labelStyle: TextStyle(fontSize: 18),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(width: 20.0),
-                    ElevatedButton(
-                      onPressed: _addService,
-                      child: Text(
-                        'Add',
-                        style: TextStyle(
-                          fontSize: 18,
+                        SizedBox(height: 20.0),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextFormField(
+                                controller: _servicesController,
+                                decoration: InputDecoration(
+                                  labelText: 'More Visit Places Nearly',
+                                  labelStyle: TextStyle(fontSize: 18),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20.0),
+                            ElevatedButton(
+                              onPressed: _addService,
+                              child: Text(
+                                'Add',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                        Wrap(
+                          children: _services.map((service) {
+                            return Chip(
+                              label: Text(service),
+                              onDeleted: () {
+                                setState(() {
+                                  _services.remove(service);
+                                });
+                              },
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(height: 16.0),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          child: const Text('Update'),
+                          onPressed: () async {
+                            final String name = _nameController.text;
+                            final String description = _descriptionController.text;
+                            final String visitedPlaces = _visitedPlacesController.text;
+
+
+                            await _places.doc(documentSnapshot?.id).update({
+                              "description": description,
+                              "name": name,
+                              "visitedplaces": visitedPlaces,
+                              "services": _services,
+                            });
+
+                            _nameController.text = '';
+                            _descriptionController.text = '';
+                            _visitedPlacesController.text = '';
+                            _servicesController.text = '';
+                            _services.clear();
+                            Navigator.of(ctx).pop();
+                          },
+                        )
+                      ],
                     ),
-                  ],
-                ),
-                Wrap(
-                  children: _services.map((service) {
-                    return Chip(
-                      label: Text(service),
-                      onDeleted: () {
-                        setState(() {
-                          _services.remove(service);
-                        });
-                      },
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 16.0),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  child: const Text('Create'),
-                  onPressed: () async {
-                    final String name = _nameController.text;
-                    final String description = _descriptionController.text;
-                    final String visitedPlaces = _visitedPlacesController.text;
-
-                    // Upload the image to Firebase Storage
-                    final imageUrl = await _uploadImageToStorage(_selectedImage);
-
-                    await _places.add({
-                      "description": description,
-                      "name": name,
-                      "visitedplaces": visitedPlaces,
-                      "services": _services,
-                      "imageUrl": imageUrl, // Store the image URL in Firestore
-                    });
-
-                    _nameController.text = '';
-                    _descriptionController.text = '';
-                    _visitedPlacesController.text = '';
-                    _servicesController.text = '';
-                    _services.clear();
-                    _selectedImage = null; // Clear the selected image
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
             ),
           ),
+        ),
         );
       },
     );
   }
+
+
 
   Future<void> _delete(String placeId) async {
     await _places.doc(placeId).delete();
@@ -393,7 +377,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Firebase Firestore')),
+        title: const Center(child: Text('Add New Places')),
       ),
       body: StreamBuilder(
         stream: _places.snapshots(),
