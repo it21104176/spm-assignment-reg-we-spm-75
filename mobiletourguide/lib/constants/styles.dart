@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 const TextStyle greet = TextStyle(
   fontSize: 20,
-  color: textLight,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
 );
 const TextStyle descStyle = TextStyle(

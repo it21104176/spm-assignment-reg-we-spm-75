@@ -32,6 +32,7 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      // ignore: unused_local_variable
       User? user = result.user;
     } catch (error) {
       print(error.toString());
