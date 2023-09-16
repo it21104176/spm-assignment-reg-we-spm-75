@@ -44,7 +44,7 @@ class FullScreenImageWithButton extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text('Get Start...', style: TextStyle(fontSize: 22.0)),
+                  child: Text('Get Started', style: TextStyle(fontSize: 22.0)),
                 ),
               ),
             ),
