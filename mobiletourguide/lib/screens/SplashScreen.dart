@@ -54,7 +54,7 @@ class SplashScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      'Your Personal Tour Companion App      for Memorable Journeys',
+                      'Your Personal Tour Companion App for Memorable Journeys',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black54,
