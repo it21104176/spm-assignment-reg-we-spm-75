@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobiletourguide/screens/AddNewPlaces.dart';
 import 'package:mobiletourguide/screens/DisplayPlaces.dart';
 import 'package:mobiletourguide/screens/UserLocation/userLocation.dart';
 import 'package:mobiletourguide/screens/pointOfinterest/InterestPlace.dart';
@@ -75,7 +76,7 @@ class _HomeState extends State<Home> {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => DisplayPlaces(),
+                              builder: (context) => AddNewPlaces(),
                             ),
                           );
                         },
@@ -100,7 +101,7 @@ class _HomeState extends State<Home> {
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, // You can adjust the number of columns as per your preference
                           ),
-                          itemCount: streamSnapshot.data!.docs.length,
+                          itemCount: 4,
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
                             final String imageUrl = documentSnapshot['imageUrl']; // Extract imageUrl
@@ -231,79 +232,115 @@ class PlaceDetailsPage extends StatelessWidget {
             final String imageUrl = data['imageUrl'];
             final String name = data['name'];
             final String description = data['description'];
-            final String visitedPlaces = data['visitedplaces'];
+            final List<dynamic> visitedPlaces = data['visitedplaces'];
             final List<dynamic> services = data['services'];
 
-            return SingleChildScrollView(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Display the image
-                  Center(
-                    child: Image.network(
-                      imageUrl,
-                      height: 200.0,
-                      width: 200.0,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  // Display the name
-                  Text(
-                    'Name:',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    name,
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  SizedBox(height: 12.0),
-                  // Display the description
-                  Text(
-                    'Description:',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    description,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  SizedBox(height: 12.0),
-                  // Display the visiting places
-                  Text(
-                    'Visiting Places:',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    visitedPlaces,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  SizedBox(height: 12.0),
-                  // Display the services
-                  Text(
-                    'Services:',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                  ),
-                  // Display the list of services with bullets
-                  for (var service in services)
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.arrow_forward,
-                          size: 16.0,
-                        ),
-                        SizedBox(width: 4.0),
-                        Expanded(
-                          child: Text(
-                            service,
-                            style: TextStyle(fontSize: 16.0),
+            return Column( // Wrap the Column in Center
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center, // Center-align the content
+                      children: <Widget>[
+                        // Display the image
+                        Center(
+                          child: Image.network(
+                            imageUrl,
+                            height: 200.0,
+                            width: 200.0,
+                            fit: BoxFit.cover,
                           ),
                         ),
+                        SizedBox(height: 20.0),
+                        // Display the name
+                        Padding(padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            name,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        // Display the description
+                        const Text(
+                          'Description',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            description,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        // Display the services
+                        const Text(
+                          'More Services  ',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        for (var service in services)
+                          Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 4.0),
+                                Expanded(
+                                  child: Text(
+                                    service,
+                                    style: TextStyle(fontSize: 16.0),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        SizedBox(height: 20.0),
+                        // Display the visiting places
+                        const Text(
+                          'Places to visit  ',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        for (var visitedplace in visitedPlaces)
+                          Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 4.0),
+                                Expanded(
+                                  child: Text(
+                                    visitedplace,
+                                    style: TextStyle(fontSize: 16.0),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
                       ],
                     ),
-                ],
-              ),
+                  ),
+                )
+              ],
+
             );
           }
         },
@@ -311,3 +348,5 @@ class PlaceDetailsPage extends StatelessWidget {
     );
   }
 }
+
+

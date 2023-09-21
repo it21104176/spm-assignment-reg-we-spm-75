@@ -45,9 +45,7 @@ dependencies:
   fluttertoast: ^8.2.2
   geolocator: ^10.0.1
   geocoding: ^2.1.0
-
-
-
+  flutter_gradient_colors: ^2.1.1
 
 
 dev_dependencies:

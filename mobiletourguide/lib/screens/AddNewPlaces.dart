@@ -23,6 +23,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _visitedPlacesController = TextEditingController();
+  final List<String> _visitedPlaces =  [];
   final TextEditingController _servicesController = TextEditingController();
   final List<String> _services = [];
   File? _selectedImage;
@@ -118,16 +119,45 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                       },
                     ),
                     SizedBox(height: 20.0),
-                    TextField(
-                      controller: _visitedPlacesController,
-                      decoration: InputDecoration(
-                        labelText: 'Service in that area',
-                        labelStyle: TextStyle(fontSize: 18),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            controller: _visitedPlacesController,
+                            decoration: InputDecoration(
+                              labelText: 'Places top visit : ',
+                              labelStyle: TextStyle(fontSize: 18),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        SizedBox(width: 20.0),
+                        ElevatedButton(
+                          onPressed: _addPlaces,
+                          child: Text(
+                            'Add',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    Wrap(
+                      children: _visitedPlaces.map((visitedplace) {
+                        return Chip(
+                          label: Text(visitedplace),
+                          onDeleted: () {
+                            setState(() {
+                              _visitedPlaces.remove(visitedplace);
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+
                     SizedBox(height: 20.0),
                     Row(
                       children: <Widget>[
@@ -135,7 +165,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                           child: TextFormField(
                             controller: _servicesController,
                             decoration: InputDecoration(
-                              labelText: 'More Visit Places Nearly',
+                              labelText: 'More Service ',
                               labelStyle: TextStyle(fontSize: 18),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -167,6 +197,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                         );
                       }).toList(),
                     ),
+
                     SizedBox(height: 16.0),
                     const SizedBox(
                       height: 20,
@@ -176,7 +207,6 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                       onPressed: () async {
                         final String name = _nameController.text;
                         final String description = _descriptionController.text;
-                        final String visitedPlaces = _visitedPlacesController.text;
 
                         // Upload the image to Firebase Storage
                         final imageUrl = await _uploadImageToStorage(_selectedImage);
@@ -184,7 +214,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                         await _places.add({
                           "description": description,
                           "name": name,
-                          "visitedplaces": visitedPlaces,
+                          "visitedplaces": _visitedPlaces,
                           "services": _services,
                           "imageUrl": imageUrl, // Store the image URL in Firestore
                         });
@@ -192,6 +222,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                         _nameController.text = '';
                         _descriptionController.text = '';
                         _visitedPlacesController.text = '';
+                        _visitedPlaces.clear();
                         _servicesController.text = '';
                         _services.clear();
                         _selectedImage = null; // Clear the selected image
@@ -212,11 +243,13 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
     if (documentSnapshot != null) {
       _nameController.text = documentSnapshot['name'];
       _descriptionController.text = documentSnapshot['description'];
-      _visitedPlacesController.text = documentSnapshot['visitedplaces'];
+      _visitedPlacesController.text = '';
       _servicesController.text = '';
       setState(() {
         _services.clear();
         _services.addAll((documentSnapshot['services'] as List).cast<String>());
+        _visitedPlaces.clear();
+        _visitedPlaces.addAll((documentSnapshot['visitedplaces'] as List).cast<String>());
       });
     }
 
@@ -252,7 +285,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                         TextFormField(
                           controller: _descriptionController,
                           decoration: InputDecoration(
-                            labelText: 'Description',
+                            labelText: 'Description : ',
                             labelStyle: TextStyle(fontSize: 18),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
@@ -267,15 +300,43 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                           },
                         ),
                         SizedBox(height: 20.0),
-                        TextField(
-                          controller: _visitedPlacesController,
-                          decoration: InputDecoration(
-                            labelText: 'Service in that area',
-                            labelStyle: TextStyle(fontSize: 18),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextFormField(
+                                controller: _visitedPlacesController,
+                                decoration: InputDecoration(
+                                  labelText: 'Places top visit : ',
+                                  labelStyle: TextStyle(fontSize: 18),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(width: 20.0),
+                            ElevatedButton(
+                              onPressed: _addPlaces,
+                              child: const Text(
+                                'Add',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Wrap(
+                          children: _visitedPlaces.map((visitedplace) {
+                            return Chip(
+                              label: Text(visitedplace),
+                              onDeleted: () {
+                                setState(() {
+                                  _visitedPlaces.remove(visitedplace);
+                                });
+                              },
+                            );
+                          }).toList(),
                         ),
                         SizedBox(height: 20.0),
                         Row(
@@ -284,7 +345,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                               child: TextFormField(
                                 controller: _servicesController,
                                 decoration: InputDecoration(
-                                  labelText: 'More Visit Places Nearly',
+                                  labelText: 'More Service ',
                                   labelStyle: TextStyle(fontSize: 18),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -295,7 +356,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                             SizedBox(width: 20.0),
                             ElevatedButton(
                               onPressed: _addService,
-                              child: Text(
+                              child: const Text(
                                 'Add',
                                 style: TextStyle(
                                   fontSize: 18,
@@ -325,19 +386,19 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                           onPressed: () async {
                             final String name = _nameController.text;
                             final String description = _descriptionController.text;
-                            final String visitedPlaces = _visitedPlacesController.text;
 
 
                             await _places.doc(documentSnapshot?.id).update({
                               "description": description,
                               "name": name,
-                              "visitedplaces": visitedPlaces,
+                              "visitedplaces": _visitedPlaces,
                               "services": _services,
                             });
 
                             _nameController.text = '';
                             _descriptionController.text = '';
                             _visitedPlacesController.text = '';
+                            _visitedPlaces.clear();
                             _servicesController.text = '';
                             _services.clear();
                             Navigator.of(ctx).pop();
@@ -372,7 +433,15 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
       });
     }
   }
-
+  void _addPlaces() {
+    final visitedplace = _visitedPlacesController.text.trim();
+    if (visitedplace.isNotEmpty) {
+      setState(() {
+        _visitedPlaces.add(visitedplace);
+        _visitedPlacesController.clear(); // Clear the input field
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
