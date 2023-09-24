@@ -35,7 +35,7 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
-                final String imageUrl = documentSnapshot['imageUrl']; // Extract imageUrl
+                final String imageUrl = documentSnapshot['mainImageUrl']; // Extract imageUrl
                 final String name = documentSnapshot['name']; // Extract name
                 final String placeId = documentSnapshot.id; // Get the document ID
 
@@ -121,11 +121,12 @@ class PlaceDetailsPage extends StatelessWidget {
             return Center(child: Text('Place not found'));
           } else {
             final data = snapshot.data!.data() as Map<String, dynamic>;
-            final String imageUrl = data['imageUrl'];
+            final String imageUrl = data['mainImageUrl'];
             final String name = data['name'];
             final String description = data['description'];
             final List<dynamic> visitedPlaces = data['visitedplaces'];
             final List<dynamic> services = data['services'];
+            final List<dynamic> additionalImageUrls = data['additionalImageUrls'];
 
             return Column( // Wrap the Column in Center
               children: <Widget>[
@@ -226,7 +227,35 @@ class PlaceDetailsPage extends StatelessWidget {
                               ],
                             ),
                           ),
-
+                        SizedBox(height: 16.0),
+                        // Display the description
+                        const Text(
+                          'More Images',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        for (var additionalimageurls in additionalImageUrls)
+                          Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 4.0),
+                                Expanded(
+                                  child: Image.network(
+                                    additionalimageurls,
+                                    height: 200.0,
+                                    width: 400.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
