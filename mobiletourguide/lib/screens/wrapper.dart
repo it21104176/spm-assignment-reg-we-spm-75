@@ -1,7 +1,7 @@
 import 'package:mobiletourguide/models/user.dart';
 import 'package:mobiletourguide/screens/auth/auth.dart';
-import 'package:mobiletourguide/screens/Home.dart';
 import 'package:flutter/material.dart';
+import 'package:mobiletourguide/widgets/navigation.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
@@ -15,7 +15,9 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Auth();
     } else {
-      return const Home();
+      return const Navigation(
+        initialIndex: 0,
+      );
     }
   }
 }
