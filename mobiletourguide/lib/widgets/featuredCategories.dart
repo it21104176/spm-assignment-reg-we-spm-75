@@ -5,54 +5,53 @@ class FeaturedCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/beach.png'),
-            ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/ancient.png'),
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/wildlife.png'),
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          width: 75,
-          height: 75,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: const DecorationImage(
-              image: AssetImage('assets/images/mountain.png'),
-            ),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildCategoryCard('assets/images/beach.png'),
+            _buildCategoryCard('assets/images/ancient.png'),
+            _buildCategoryCard('assets/images/wildlife.png'),
+            _buildCategoryCard('assets/images/mountain.png'),
+          ],
         ),
       ],
+    );
+  }
+
+  Widget _buildCategoryCard(String imagePath) {
+    return Card(
+      elevation: 4, // You can adjust the elevation here
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        width: 75,
+        height: 75,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover, // You can adjust the fit as needed
+          ),
+        ),
+      ),
     );
   }
 }
