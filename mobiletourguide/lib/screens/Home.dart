@@ -77,8 +77,10 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                Expanded(
+                const SizedBox(height: 5),
+                Container(
+                  height:
+                      200, // Set the height for your horizontal scrollable section
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('places')
@@ -86,24 +88,19 @@ class _HomeState extends State<Home> {
                     builder:
                         (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                       if (streamSnapshot.hasData) {
-                        return GridView.builder(
-                          gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                            2, // You can adjust the number of columns as per your preference
-                          ),
-                          itemCount: streamSnapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot documentSnapshot =
-                            streamSnapshot.data!.docs[index];
-                            final String imageUrl = documentSnapshot[
-                                'mainImageUrl']; // Extract imageUrl
-                            final String name =
-                            documentSnapshot['name']; // Extract name
-                            final String placeId =
-                                documentSnapshot.id; // Get the document ID
+                        final List<Widget> favoriteDestinations = [];
 
-                            return GestureDetector(
+                        for (final DocumentSnapshot documentSnapshot
+                            in streamSnapshot.data!.docs) {
+                          final String imageUrl = documentSnapshot[
+                              'mainImageUrl']; // Extract imageUrl
+                          final String name =
+                              documentSnapshot['name']; // Extract name
+                          final String placeId =
+                              documentSnapshot.id; // Get the document ID
+
+                          favoriteDestinations.add(
+                            GestureDetector(
                               onTap: () {
                                 // Navigate to the details page when a box is tapped.
                                 Navigator.of(context).push(
@@ -113,46 +110,50 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              child: Card(
-                                color: Colors.white38,
-                                elevation: 4,
-                                margin: const EdgeInsets.all(10),
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    color: Colors.black,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffd9d9d9),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    SizedBox(height: 15),
                                     Container(
-                                      alignment:
-                                      Alignment.center, // Center the image.
-                                      child: Image.network(
-                                        // Use Image.network to load the image from URL
-                                        imageUrl,
-                                        height: 100, // Set the image height
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Text(
-                                        name,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                      margin: EdgeInsets.all(5),
+                                      width: 140,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              imageUrl), // Use NetworkImage to load the image from a network URL
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 15),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(name),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
-                            );
-                          },
+                            ),
+                          );
+                        }
+
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: favoriteDestinations,
                         );
                       }
 
@@ -215,9 +216,8 @@ class PlaceDetailsPage extends StatelessWidget {
         title: Text('Place Details'),
       ),
       body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('places')
-            .doc(placeId)
-            .get(),
+        future:
+            FirebaseFirestore.instance.collection('places').doc(placeId).get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -240,19 +240,27 @@ class PlaceDetailsPage extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       // Center-align the content
                       children: <Widget>[
                         // Display the image
-                        Center(
-                          child: Image.network(
-                            imageUrl,
-                            height: 200.0,
-                            width: 200.0,
+                        Container(
+                          height: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0.0, 2.0),
+                                blurRadius: 6.0,
+                              )
+                            ],
+                          ),
+                          child: Image(
                             fit: BoxFit.cover,
+                            image: NetworkImage(imageUrl),
                           ),
                         ),
                         SizedBox(height: 16.0),

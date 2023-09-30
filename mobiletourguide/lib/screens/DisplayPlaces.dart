@@ -38,6 +38,8 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                 final String imageUrl =
                     documentSnapshot['mainImageUrl']; // Extract imageUrl
                 final String name = documentSnapshot['name']; // Extract name
+                final String description =
+                    documentSnapshot['description']; // Extract description
                 final String placeId =
                     documentSnapshot.id; // Get the document ID
 
@@ -51,37 +53,48 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                       ),
                     );
                   },
-                  child: Card(
-                    color: Colors.white38,
-                    elevation: 4,
+                  child: Container(
                     margin: const EdgeInsets.all(10),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.black,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xffd9d9d9),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 15),
                         Container(
-                          alignment: Alignment.center, // Center the image.
-                          child: Image.network(
-                            // Use Image.network to load the image from URL
-                            imageUrl,
-                            height: 200,
-                            fit: BoxFit.cover,
+                          margin: EdgeInsets.all(5),
+                          width: double.infinity,
+                          height: 140,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: NetworkImage(
+                                  imageUrl), // Use NetworkImage to load the image from a network URL
+                            ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(6.0),
                           child: Text(
                             name,
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Text(
+                            description, // Display the description below the name
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow
+                                .ellipsis, // Display ellipsis (...) for overflowed text
                           ),
                         ),
                         SizedBox(height: 15),
