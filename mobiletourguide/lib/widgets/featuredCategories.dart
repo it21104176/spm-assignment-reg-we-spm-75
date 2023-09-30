@@ -48,7 +48,7 @@ class FeaturedCategories extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: const DecorationImage(
-              image: AssetImage('assets/images/historical.png'),
+              image: AssetImage('assets/images/mountain.png'),
             ),
           ),
         ),

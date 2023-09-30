@@ -9,7 +9,6 @@ void main() async {
   runApp(const DisplayPlaces());
 }
 
-
 class DisplayPlaces extends StatefulWidget {
   const DisplayPlaces({Key? key}) : super(key: key);
 
@@ -18,8 +17,8 @@ class DisplayPlaces extends StatefulWidget {
 }
 
 class _DisplayPlacesState extends State<DisplayPlaces> {
-
-  final CollectionReference _places = FirebaseFirestore.instance.collection('places');
+  final CollectionReference _places =
+      FirebaseFirestore.instance.collection('places');
 
   @override
   Widget build(BuildContext context) {
@@ -34,56 +33,61 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
             return ListView.builder(
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
-                final String imageUrl = documentSnapshot['mainImageUrl']; // Extract imageUrl
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[index];
+                final String imageUrl =
+                    documentSnapshot['mainImageUrl']; // Extract imageUrl
                 final String name = documentSnapshot['name']; // Extract name
-                final String placeId = documentSnapshot.id; // Get the document ID
+                final String placeId =
+                    documentSnapshot.id; // Get the document ID
 
                 return GestureDetector(
-                    onTap: () {
-                  // Navigate to the details page when a card is tapped.
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PlaceDetailsPage(placeId: placeId),
-                    ),
-                  );
-                },
-                child: Card(
-                  color: Colors.white38,
-                  elevation: 4,
-                  margin: const EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black,
-                      width: 2.0,
-                    ),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 15),
-                      Container(
-                        alignment: Alignment.center, // Center the image.
-                        child: Image.network( // Use Image.network to load the image from URL
-                          imageUrl,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
+                  onTap: () {
+                    // Navigate to the details page when a card is tapped.
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PlaceDetailsPage(placeId: placeId),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          name,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+                    );
+                  },
+                  child: Card(
+                    color: Colors.white38,
+                    elevation: 4,
+                    margin: const EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.black,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height: 15),
+                        Container(
+                          alignment: Alignment.center, // Center the image.
+                          child: Image.network(
+                            // Use Image.network to load the image from URL
+                            imageUrl,
+                            height: 200,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 15),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            name,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                      ],
+                    ),
                   ),
-                ),
                 );
               },
             );
@@ -98,7 +102,6 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
   }
 }
 
-
 class PlaceDetailsPage extends StatelessWidget {
   final String placeId;
 
@@ -111,7 +114,8 @@ class PlaceDetailsPage extends StatelessWidget {
         title: Text('Place Details'),
       ),
       body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('places').doc(placeId).get(),
+        future:
+            FirebaseFirestore.instance.collection('places').doc(placeId).get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -126,16 +130,19 @@ class PlaceDetailsPage extends StatelessWidget {
             final String description = data['description'];
             final List<dynamic> visitedPlaces = data['visitedplaces'];
             final List<dynamic> services = data['services'];
-            final List<dynamic> additionalImageUrls = data['additionalImageUrls'];
+            final List<dynamic> additionalImageUrls =
+                data['additionalImageUrls'];
 
-            return Column( // Wrap the Column in Center
+            return Column(
+              // Wrap the Column in Center
               children: <Widget>[
                 Expanded(
                   child: SingleChildScrollView(
                     padding: EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center, // Center-align the content
+                      crossAxisAlignment:
+                          CrossAxisAlignment.center, // Center-align the content
                       children: <Widget>[
                         // Display the image
                         Center(
@@ -148,7 +155,8 @@ class PlaceDetailsPage extends StatelessWidget {
                         ),
                         SizedBox(height: 16.0),
                         // Display the name
-                        Padding(padding: const EdgeInsets.all(12.0),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
                           child: Text(
                             name,
                             style: const TextStyle(
@@ -165,7 +173,8 @@ class PlaceDetailsPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Padding(padding: const EdgeInsets.all(12.0),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
                           child: Text(
                             description,
                             style: const TextStyle(
@@ -261,7 +270,6 @@ class PlaceDetailsPage extends StatelessWidget {
                   ),
                 )
               ],
-
             );
           }
         },

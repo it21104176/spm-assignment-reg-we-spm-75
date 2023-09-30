@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(height: 10),
                 const Search(),
                 const SizedBox(height: 10),
-                //const FeaturedCategories(),
+                const FeaturedCategories(),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
                             final DocumentSnapshot documentSnapshot =
                             streamSnapshot.data!.docs[index];
                             final String imageUrl = documentSnapshot[
-                            'mainImageUrl']; // Extract imageUrl
+                                'mainImageUrl']; // Extract imageUrl
                             final String name =
                             documentSnapshot['name']; // Extract name
                             final String placeId =
@@ -232,10 +232,11 @@ class PlaceDetailsPage extends StatelessWidget {
             final String description = data['description'];
             final List<dynamic> visitedPlaces = data['visitedplaces'];
             final List<dynamic> services = data['services'];
-            final List<
-                dynamic> additionalImageUrls = data['additionalImageUrls'];
+            final List<dynamic> additionalImageUrls =
+                data['additionalImageUrls'];
 
-            return Column( // Wrap the Column in Center
+            return Column(
+              // Wrap the Column in Center
               children: <Widget>[
                 Expanded(
                   child: SingleChildScrollView(
@@ -256,7 +257,8 @@ class PlaceDetailsPage extends StatelessWidget {
                         ),
                         SizedBox(height: 16.0),
                         // Display the name
-                        Padding(padding: const EdgeInsets.all(12.0),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
                           child: Text(
                             name,
                             style: const TextStyle(
@@ -273,7 +275,8 @@ class PlaceDetailsPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Padding(padding: const EdgeInsets.all(12.0),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
                           child: Text(
                             description,
                             style: const TextStyle(
@@ -369,7 +372,6 @@ class PlaceDetailsPage extends StatelessWidget {
                   ),
                 )
               ],
-
             );
           }
         },
