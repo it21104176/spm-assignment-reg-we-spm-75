@@ -88,18 +88,18 @@ class _HomeState extends State<Home> {
                       if (streamSnapshot.hasData) {
                         return GridView.builder(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                          SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount:
-                                2, // You can adjust the number of columns as per your preference
+                            2, // You can adjust the number of columns as per your preference
                           ),
                           itemCount: streamSnapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs[index];
+                            streamSnapshot.data!.docs[index];
                             final String imageUrl = documentSnapshot[
                                 'mainImageUrl']; // Extract imageUrl
                             final String name =
-                                documentSnapshot['name']; // Extract name
+                            documentSnapshot['name']; // Extract name
                             final String placeId =
                                 documentSnapshot.id; // Get the document ID
 
@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                                     SizedBox(height: 15),
                                     Container(
                                       alignment:
-                                          Alignment.center, // Center the image.
+                                      Alignment.center, // Center the image.
                                       child: Image.network(
                                         // Use Image.network to load the image from URL
                                         imageUrl,
@@ -215,8 +215,9 @@ class PlaceDetailsPage extends StatelessWidget {
         title: Text('Place Details'),
       ),
       body: FutureBuilder(
-        future:
-            FirebaseFirestore.instance.collection('places').doc(placeId).get(),
+        future: FirebaseFirestore.instance.collection('places')
+            .doc(placeId)
+            .get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

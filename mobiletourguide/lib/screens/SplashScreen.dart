@@ -89,7 +89,7 @@ class SplashScreen extends StatelessWidget {
                             ),
                             elevation: 0, // No shadow
                             primary:
-                                Colors.transparent, // Transparent background
+                            Colors.transparent, // Transparent background
                           ),
                           child: Ink(
                             padding: EdgeInsets.symmetric(
