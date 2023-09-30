@@ -25,179 +25,202 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Home"),
-          actions: [
-            ElevatedButton(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              child: const Icon(Icons.logout),
-            )
-          ],
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(200),
+          child: AppBar(
+            title: const Text("Home"),
+            centerTitle: true,
+            actions: [
+              ElevatedButton(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  elevation: 1,
+                ),
+                child: const Icon(Icons.logout),
+              )
+            ],
+            flexibleSpace: Container(
+              child: const Header(),
+            ),
+          ),
         ),
-        body: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Header(),
-                const SizedBox(height: 10),
-                const Search(),
-                const SizedBox(height: 10),
-                const FeaturedCategories(),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Favorite destinations',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => DisplayPlaces(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'See All',
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //const Header(),
+                  const SizedBox(height: 10),
+                  const Search(),
+                  const SizedBox(height: 10),
+                  const FeaturedCategories(),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Popular Destinations',
                           style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.blue,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DisplayPlaces(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'See All',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  height:
-                      200, // Set the height for your horizontal scrollable section
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('places')
-                        .snapshots(),
-                    builder:
-                        (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                      if (streamSnapshot.hasData) {
-                        final List<Widget> favoriteDestinations = [];
+                  Container(
+                    height:
+                        200, // Set the height for your horizontal scrollable section
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('places')
+                          .snapshots(),
+                      builder: (context,
+                          AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                        if (streamSnapshot.hasData) {
+                          final List<Widget> favoriteDestinations = [];
 
-                        for (final DocumentSnapshot documentSnapshot
-                            in streamSnapshot.data!.docs) {
-                          final String imageUrl = documentSnapshot[
-                              'mainImageUrl']; // Extract imageUrl
-                          final String name =
-                              documentSnapshot['name']; // Extract name
-                          final String placeId =
-                              documentSnapshot.id; // Get the document ID
+                          for (final DocumentSnapshot documentSnapshot
+                              in streamSnapshot.data!.docs) {
+                            final String imageUrl = documentSnapshot[
+                                'mainImageUrl']; // Extract imageUrl
+                            final String name =
+                                documentSnapshot['name']; // Extract name
+                            final String placeId =
+                                documentSnapshot.id; // Get the document ID
 
-                          favoriteDestinations.add(
-                            GestureDetector(
-                              onTap: () {
-                                // Navigate to the details page when a box is tapped.
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PlaceDetailsPage(placeId: placeId),
+                            favoriteDestinations.add(
+                              GestureDetector(
+                                onTap: () {
+                                  // Navigate to the details page when a box is tapped.
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PlaceDetailsPage(
+                                        placeId: placeId,
+                                        imageUrl: imageUrl,
+                                        name: name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Card(
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                );
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  color: Color(0xffd9d9d9),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.all(5),
-                                      width: 140,
-                                      height: 140,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              imageUrl), // Use NetworkImage to load the image from a network URL
+                                  child: Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffd9d9d9),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          margin: EdgeInsets.all(5),
+                                          width: 140,
+                                          height: 140,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  imageUrl), // Use NetworkImage to load the image from a network URL
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(name),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(name),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
+                            );
+                          }
+
+                          return ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: favoriteDestinations,
                           );
                         }
 
-                        return ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: favoriteDestinations,
+                        return const Center(
+                          child: CircularProgressIndicator(),
                         );
-                      }
-
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-            // Align(
-            //   alignment: Alignment.bottomRight,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(16.0),
-            //     child: FloatingActionButton(
-            //       onPressed: () {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (context) => LocationPage(),
-            //           ),
-            //         );
-            //       },
-            //       child: const Icon(Icons.my_location),
-            //     ),
-            //   ),
-            // ),
-            // Align(
-            //   alignment: Alignment.topRight,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(16.0),
-            //     child: ElevatedButton(
-            //       onPressed: () {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (context) => InterestPlace(),
-            //           ),
-            //         );
-            //       },
-            //       child: const Text('Point of Interest'),
-            //     ),
-            //   ),
-            // ),
-          ],
+                ],
+              ),
+              // Align(
+              //   alignment: Alignment.bottomRight,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: FloatingActionButton(
+              //       onPressed: () {
+              //         Navigator.of(context).push(
+              //           MaterialPageRoute(
+              //             builder: (context) => LocationPage(),
+              //           ),
+              //         );
+              //       },
+              //       child: const Icon(Icons.my_location),
+              //     ),
+              //   ),
+              // ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: ElevatedButton(
+              //       onPressed: () {
+              //         Navigator.of(context).push(
+              //           MaterialPageRoute(
+              //             builder: (context) => InterestPlace(),
+              //           ),
+              //         );
+              //       },
+              //       child: const Text('Point of Interest'),
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );
@@ -206,14 +229,61 @@ class _HomeState extends State<Home> {
 
 class PlaceDetailsPage extends StatelessWidget {
   final String placeId;
+  final String imageUrl;
+  final String name;
 
-  const PlaceDetailsPage({required this.placeId, Key? key}) : super(key: key);
+  const PlaceDetailsPage(
+      {required this.placeId,
+      required this.imageUrl,
+      required this.name,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Place Details'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(250),
+        child: AppBar(
+          title: null, // Remove the title
+          centerTitle: true,
+          flexibleSpace: Stack(
+            fit: StackFit.expand,
+            children: [
+              // Background image
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              // Overlayed name text
+              Positioned(
+                left: 16.0,
+                right: 16.0,
+                bottom: 16.0,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.black
+                        .withOpacity(0.5), // Semi-transparent background
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    name, // Display the name
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: FutureBuilder(
         future:
@@ -245,36 +315,7 @@ class PlaceDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       // Center-align the content
                       children: <Widget>[
-                        // Display the image
-                        Container(
-                          height: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0.0, 2.0),
-                                blurRadius: 6.0,
-                              )
-                            ],
-                          ),
-                          child: Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(imageUrl),
-                          ),
-                        ),
                         SizedBox(height: 16.0),
-                        // Display the name
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            name,
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 12.0),
                         // Display the description
                         const Text(
                           'Description',

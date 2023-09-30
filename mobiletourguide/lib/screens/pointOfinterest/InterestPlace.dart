@@ -12,10 +12,12 @@ class InterestPlace extends StatefulWidget {
 class _InterestPlaceState extends State<InterestPlace> {
   // Text fields' controllers
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _interestPlaceController = TextEditingController();
+  final TextEditingController _interestPlaceController =
+      TextEditingController();
 
-  final CollectionReference _poiCollection =
-  FirebaseFirestore.instance.collection('PointOfInterest'); // Change to your Firestore collection name
+  final CollectionReference _poiCollection = FirebaseFirestore.instance
+      .collection(
+          'PointOfInterest'); // Change to your Firestore collection name
 
   Future<void> _create() async {
     await showModalBottomSheet(
@@ -37,14 +39,16 @@ class _InterestPlaceState extends State<InterestPlace> {
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Description',
-                  labelStyle: TextStyle(color: Colors.grey), // Set label color to grey
+                  labelStyle:
+                      TextStyle(color: Colors.grey), // Set label color to grey
                 ),
               ),
               TextField(
                 controller: _interestPlaceController,
                 decoration: InputDecoration(
                   labelText: 'Point Of Interest',
-                  labelStyle: TextStyle(color: Colors.grey), // Set label color to grey
+                  labelStyle:
+                      TextStyle(color: Colors.grey), // Set label color to grey
                 ),
               ),
               const SizedBox(
@@ -103,14 +107,16 @@ class _InterestPlaceState extends State<InterestPlace> {
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: 'Description',
-                  labelStyle: TextStyle(color: Colors.grey), // Set label color to grey
+                  labelStyle:
+                      TextStyle(color: Colors.grey), // Set label color to grey
                 ),
               ),
               TextField(
                 controller: _interestPlaceController,
                 decoration: InputDecoration(
                   labelText: 'Point Of Interest',
-                  labelStyle: TextStyle(color: Colors.grey), // Set label color to grey
+                  labelStyle:
+                      TextStyle(color: Colors.grey), // Set label color to grey
                 ),
               ),
               const SizedBox(
@@ -154,8 +160,20 @@ class _InterestPlaceState extends State<InterestPlace> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Firebase Firestore')),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(200),
+        child: AppBar(
+          title: const Text("Interest"),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/banner.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
       ),
       body: StreamBuilder(
         stream: _poiCollection.snapshots(),
@@ -165,7 +183,7 @@ class _InterestPlaceState extends State<InterestPlace> {
               itemCount: streamSnapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[index];
+                    streamSnapshot.data!.docs[index];
                 return Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
@@ -203,7 +221,8 @@ class _InterestPlaceState extends State<InterestPlace> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _create(),
         child: const Icon(Icons.add),
-        backgroundColor: Colors.grey, // Set the background color of the add button
+        backgroundColor:
+            Colors.grey, // Set the background color of the add button
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

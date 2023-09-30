@@ -53,52 +53,58 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                       ),
                     );
                   },
-                  child: Container(
+                  child: Card(
                     margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Color(0xffd9d9d9),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(5),
-                          width: double.infinity,
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: NetworkImage(
-                                  imageUrl), // Use NetworkImage to load the image from a network URL
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffd9d9d9),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            width: double.infinity,
+                            height: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: NetworkImage(
+                                    imageUrl), // Use NetworkImage to load the image from a network URL
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(
+                              name,
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Text(
-                            description, // Display the description below the name
-                            style: TextStyle(
-                              fontSize: 16,
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(
+                              description, // Display the description below the name
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow
+                                  .ellipsis, // Display ellipsis (...) for overflowed text
                             ),
-                            maxLines: 2,
-                            overflow: TextOverflow
-                                .ellipsis, // Display ellipsis (...) for overflowed text
                           ),
-                        ),
-                        SizedBox(height: 15),
-                      ],
+                          SizedBox(height: 15),
+                        ],
+                      ),
                     ),
                   ),
                 );
