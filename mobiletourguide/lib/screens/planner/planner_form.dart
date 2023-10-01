@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:weather_icons/weather_icons.dart';
 
 class PlannerForm extends StatefulWidget {
   const PlannerForm(
@@ -22,13 +23,97 @@ class _PlannerFormState extends State<PlannerForm> {
   final TextEditingController activitiesExpenseController =
       TextEditingController();
   DateTime selectedDate = DateTime.now();
+  String weatherCondition = "";
 
   // Define weather conditions and corresponding item lists
-  Map<String, List<String>> weatherSuggestions = {
-    'Clear': ['sunglasses', 'sunscreen', 'hat'],
-    'Rain': ['umbrella', 'raincoat', 'waterproof shoes'],
-    'Snow': ['warm jacket', 'gloves', 'scarf'],
-    'Clouds': ['light jacket', 'hat'],
+  Map<String, List<Map<String, String>>> weatherSuggestions = {
+    'Clear': [
+      {'item': 'Sunglasses', 'image': 'assets/images/sunglasses.png'},
+      {'item': 'Sunscreen', 'image': 'assets/images/sunscreen.png'},
+      {'item': 'Hat', 'image': 'assets/images/hat.png'},
+    ],
+    'Rain': [
+      {'item': 'Umbrella', 'image': 'assets/images/umbrella.png'},
+      {'item': 'Raincoat', 'image': 'assets/images/raincoat.png'},
+      {'item': 'Waterproof shoes', 'image': 'assets/images/shoes.png'},
+    ],
+    'Snow': [
+      {'item': 'Warm jacket', 'image': 'assets/images/warm_jacket.png'},
+      {'item': 'Gloves', 'image': 'assets/images/gloves.png'},
+      {'item': 'Scarf', 'image': 'assets/images/scarf.png'},
+    ],
+    'Clouds': [
+      {'item': 'Light jacket', 'image': 'assets/images/light_jacket.png'},
+      {'item': 'Cap', 'image': 'assets/images/cap.png'},
+    ],
+  };
+
+  // Map<String, List<String>> additionalData = {
+  //   'Personal Hygiene': [
+  //     'Toiletries: Toothbrush, Toothpaste, Soap, Shampoo',
+  //     'Healthcare: Medications, First Aid Kit, Prescriptions',
+  //   ],
+  //   'Electronics': [
+  //     'Essentials: Phone, Charger, Power Bank, Laptop',
+  //     'Entertainment: Tablet, Headphones, Bluetooth Speaker',
+  //   ],
+  //   'Documents': [
+  //     'Identification: NIC, Passport, Visa, Driver\'s License',
+  //     'Tickets & Reservations: Train Tickets, Hotel Confirmation, Car Rental Details',
+  //   ],
+  //   'Miscellaneous': [
+  //     'Travel Accessories: Backpacks, Travel Pillow, Reusable Water Bottle',
+  //     'Snacks: Snacks, Energy Bars',
+  //   ],
+  // };
+  // Define a mapping between item names and their corresponding images
+  Map<String, String> itemImages = {
+    'Towel': 'assets/images/towel.png',
+    'Toothpaste': 'assets/images/toothpaste.png',
+    'Soap': 'assets/images/soap.png',
+    'Slippers': 'assets/images/slippers.png',
+    'Medications': 'assets/images/medicine.png',
+    'Charger': 'assets/images/charger.png',
+    'Power Bank': 'assets/images/power_bank.png',
+    'Headphones': 'assets/images/earbuds.png',
+    'Speaker': 'assets/images/speaker.png',
+    'NIC': 'assets/images/driving_license.png',
+    'Passport': 'assets/images/passport.png',
+    "Drive License": 'assets/images/driving_license.png',
+    'Train Tickets': 'assets/images/ticket.png',
+    'Backpacks': 'assets/images/backpack.png',
+    'Pillow': 'assets/images/pillow.png',
+    'Water Bottle': 'assets/images/water_bottle.png',
+    'Snacks': 'assets/images/snack.png',
+  };
+
+  // Your updated data set with item names and categories
+  Map<String, List<String>> additionalData = {
+    'Personal Hygiene': [
+      'Towel',
+      'Toothpaste',
+      'Soap',
+      'Slippers',
+      'Medications',
+    ],
+    'Electronics': [
+      'Charger',
+      'Power Bank',
+      'Headphones',
+      'Speaker',
+    ],
+    'Documents': [
+      'NIC',
+      'Passport',
+      "Drive License",
+      'Train Tickets',
+    ],
+    'Miscellaneous': [
+      'Backpacks',
+      'Pillow',
+      'Water Bottle',
+      'Snacks',
+    ],
   };
 
   String weatherForecast = "";
@@ -69,14 +154,16 @@ class _PlannerFormState extends State<PlannerForm> {
         final weatherCondition = data['weather'][0]['main'];
 
         // Get suggestions based on weather condition
-        List<String> suggestions = weatherSuggestions[weatherCondition] ?? [];
+        List<Object> suggestions = weatherSuggestions[weatherCondition] ?? [];
 
         setState(() {
           weatherForecast =
               'Temperature: ${tempCelsius.toStringAsFixed(1)}°C\nDescription: $description';
+          this.weatherCondition =
+              weatherCondition; // Set the weather condition here
 
           // Display weather suggestions
-          weatherForecast += '\n\nSuggestions:\n${suggestions.join(", ")}';
+          //weatherForecast += '\n\nSuggestions:\n${suggestions.join(", ")}';
         });
       } else {
         setState(() {
@@ -88,6 +175,32 @@ class _PlannerFormState extends State<PlannerForm> {
         weatherForecast = 'Error: $e';
       });
     }
+  }
+
+  Icon getWeatherIcon(String weatherCondition) {
+    IconData iconData;
+    switch (weatherCondition.toLowerCase()) {
+      case 'clear':
+        iconData = WeatherIcons.day_sunny;
+        break;
+      case 'rain':
+        iconData = WeatherIcons.rain;
+        break;
+      case 'snow':
+        iconData = WeatherIcons.snow;
+        break;
+      case 'clouds':
+        iconData = WeatherIcons.cloudy;
+        break;
+      default:
+        iconData = WeatherIcons.na;
+    }
+
+    return Icon(
+      iconData,
+      size: 50, // Adjust the size of the icon as needed
+      color: Colors.blue, // Change the color of the icon as needed
+    );
   }
 
   // Function to calculate the total trip cost
@@ -119,19 +232,181 @@ class _PlannerFormState extends State<PlannerForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  "Weather Forecast",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    getWeatherIcon(
+                        weatherCondition), // Display the weather icon
+                    SizedBox(width: 10),
+                    Text(
+                      "Weather Forecast",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  weatherForecast,
-                  style: TextStyle(fontSize: 16),
+                child: Wrap(
+                  spacing: 10.0,
+                  runSpacing: 10.0,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            weatherForecast,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          'Suggestions',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    for (var suggestion
+                        in weatherSuggestions[weatherCondition] ?? [])
+                      Column(
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(suggestion['image'] ?? ''),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            suggestion['item'] ?? '',
+                            style: TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+              // // Iterate through all categories and display their items with icons
+              // Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: additionalData.entries.expand((entry) {
+              //       String category = entry.key;
+              //       List<String> items = entry.value;
+              //       return [
+              //         Padding(
+              //           padding: const EdgeInsets.only(bottom: 8.0),
+              //           child: Row(
+              //             children: [
+              //               Icon(
+              //                 Icons.check,
+              //                 size: 20,
+              //                 color: Colors.green,
+              //               ),
+              //               SizedBox(width: 10),
+              //               Text(
+              //                 category,
+              //                 style: TextStyle(
+              //                   fontSize: 16,
+              //                   fontWeight: FontWeight.bold,
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //         ...items.map((item) {
+              //           return Row(
+              //             children: [
+              //               Text(
+              //                 item,
+              //                 style: TextStyle(fontSize: 16),
+              //               ),
+              //             ],
+              //           );
+              //         }),
+              //       ];
+              //     }).toList(),
+              //   ),
+              // ),
+              // Iterate through all categories and display their items with images
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  height: 550.0, // Set a fixed height for the container
+                  child: ListView.builder(
+                    physics:
+                        NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
+                    itemCount: additionalData.length,
+                    itemBuilder: (context, index) {
+                      String category = additionalData.keys.elementAt(index);
+                      List<String> items = additionalData[category] ?? [];
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Text(
+                              category,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Wrap(
+                            spacing: 10.0, // Adjust the spacing between items
+                            runSpacing: 10.0, // Adjust the spacing between rows
+                            children: items.map((item) {
+                              String? itemImagePath = itemImages[item];
+                              return Container(
+                                width: 75,
+                                height: 75,
+                                child: Column(
+                                  children: [
+                                    if (itemImagePath != null)
+                                      Container(
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(itemImagePath),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    Text(
+                                      item,
+                                      style: TextStyle(fontSize: 12),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                          SizedBox(
+                            height: 16.0, // Add spacing between categories
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
               Divider(),
