@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobiletourguide/constants/colors.dart';
 import 'dart:convert';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -286,7 +287,7 @@ class _PlannerFormState extends State<PlannerForm> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
-                  height: 550.0, // Set a fixed height for the container
+                  height: 800.0, // Set a fixed height for the container
                   child: ListView.builder(
                     physics:
                         const NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
@@ -452,9 +453,9 @@ class _PlannerFormState extends State<PlannerForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Weather Predictor & Budget Calculator",
+                "Trip Planner",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -466,9 +467,11 @@ class _PlannerFormState extends State<PlannerForm> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: destinationController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Destination',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.location_pin),
                 ),
               ),
@@ -476,9 +479,11 @@ class _PlannerFormState extends State<PlannerForm> {
               TextFormField(
                 controller: personsController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Number of persons',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.people),
                 ),
               ),
@@ -486,9 +491,11 @@ class _PlannerFormState extends State<PlannerForm> {
               TextFormField(
                 controller: daysController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Number of nights',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.nights_stay),
                 ),
               ),
@@ -508,9 +515,11 @@ class _PlannerFormState extends State<PlannerForm> {
               TextFormField(
                 controller: foodExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Food Expense',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.fastfood),
                   suffixText: "LKR",
                 ),
@@ -519,9 +528,11 @@ class _PlannerFormState extends State<PlannerForm> {
               TextFormField(
                 controller: transportExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Transport Expense',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.train),
                   suffixText: "LKR",
                 ),
@@ -530,10 +541,12 @@ class _PlannerFormState extends State<PlannerForm> {
               TextFormField(
                 controller: activitiesExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Activities Expense',
                   helperText: 'per person per day',
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                   prefixIcon: Icon(Icons.festival),
                   suffixText: "LKR",
                 ),
@@ -558,7 +571,34 @@ class _PlannerFormState extends State<PlannerForm> {
                       // Calculate total trip cost
                       calculateTotalCost();
                     },
-                    child: const Text("Try Planner"),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero, // No padding for the button
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [secondary, secondary2], // Gradient colors
+                          begin:
+                              Alignment.centerLeft, // Gradient start position
+                          end: Alignment.centerRight, // Gradient end position
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 16.0,
+                          horizontal:
+                              32.0), // Padding for the text inside the button
+                      child: Text(
+                        "Try Planner",
+                        style: TextStyle(
+                          color: Colors.white, // Text color
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

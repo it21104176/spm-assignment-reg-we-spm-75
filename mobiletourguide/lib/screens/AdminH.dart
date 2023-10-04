@@ -45,14 +45,11 @@ class _AdminHState extends State<AdminH> {
                 const SizedBox(height: 10),
                 const Search(),
                 const SizedBox(height: 10),
-
               ],
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
