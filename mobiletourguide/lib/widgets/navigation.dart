@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobiletourguide/constants/colors.dart';
 import 'package:mobiletourguide/screens/pointOfinterest/InterestPlace.dart';
 import '../screens/home.dart';
+import '../screens/map.dart';
 import '../screens/planner/planner.dart';
 
 class Navigation extends StatefulWidget {
@@ -18,6 +20,7 @@ class _NavigationState extends State<Navigation> {
 
   final List<Widget> _screens = [
     const Home(),
+    const Map(),
     const InterestPlace(),
     const Planner(),
   ];
@@ -48,6 +51,10 @@ class _NavigationState extends State<Navigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
             label: 'Interest',
           ),
           BottomNavigationBarItem(
@@ -55,6 +62,10 @@ class _NavigationState extends State<Navigation> {
             label: 'Planner',
           ),
         ],
+        selectedItemColor: primary,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
       ),
     );
   }
