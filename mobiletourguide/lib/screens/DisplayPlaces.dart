@@ -24,7 +24,8 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Favourite Places')),
+        title: const Center(child: Text('Popular Destinations')),
+        centerTitle: true,
       ),
       body: StreamBuilder(
         stream: _places.snapshots(),

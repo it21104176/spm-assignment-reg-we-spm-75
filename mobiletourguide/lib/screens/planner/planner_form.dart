@@ -48,24 +48,6 @@ class _PlannerFormState extends State<PlannerForm> {
     ],
   };
 
-  // Map<String, List<String>> additionalData = {
-  //   'Personal Hygiene': [
-  //     'Toiletries: Toothbrush, Toothpaste, Soap, Shampoo',
-  //     'Healthcare: Medications, First Aid Kit, Prescriptions',
-  //   ],
-  //   'Electronics': [
-  //     'Essentials: Phone, Charger, Power Bank, Laptop',
-  //     'Entertainment: Tablet, Headphones, Bluetooth Speaker',
-  //   ],
-  //   'Documents': [
-  //     'Identification: NIC, Passport, Visa, Driver\'s License',
-  //     'Tickets & Reservations: Train Tickets, Hotel Confirmation, Car Rental Details',
-  //   ],
-  //   'Miscellaneous': [
-  //     'Travel Accessories: Backpacks, Travel Pillow, Reusable Water Bottle',
-  //     'Snacks: Snacks, Energy Bars',
-  //   ],
-  // };
   // Define a mapping between item names and their corresponding images
   Map<String, String> itemImages = {
     'Towel': 'assets/images/towel.png',
@@ -198,8 +180,8 @@ class _PlannerFormState extends State<PlannerForm> {
 
     return Icon(
       iconData,
-      size: 50, // Adjust the size of the icon as needed
-      color: Colors.blue, // Change the color of the icon as needed
+      size: 50,
+      color: Colors.blue,
     );
   }
 
@@ -236,8 +218,8 @@ class _PlannerFormState extends State<PlannerForm> {
                   children: [
                     getWeatherIcon(
                         weatherCondition), // Display the weather icon
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       "Weather Forecast",
                       style: TextStyle(
                         fontSize: 18,
@@ -259,7 +241,7 @@ class _PlannerFormState extends State<PlannerForm> {
                         children: [
                           Text(
                             weatherForecast,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),
@@ -292,7 +274,7 @@ class _PlannerFormState extends State<PlannerForm> {
                           ),
                           Text(
                             suggestion['item'] ?? '',
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -300,49 +282,6 @@ class _PlannerFormState extends State<PlannerForm> {
                   ],
                 ),
               ),
-              // // Iterate through all categories and display their items with icons
-              // Padding(
-              //   padding: const EdgeInsets.all(16.0),
-              //   child: Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: additionalData.entries.expand((entry) {
-              //       String category = entry.key;
-              //       List<String> items = entry.value;
-              //       return [
-              //         Padding(
-              //           padding: const EdgeInsets.only(bottom: 8.0),
-              //           child: Row(
-              //             children: [
-              //               Icon(
-              //                 Icons.check,
-              //                 size: 20,
-              //                 color: Colors.green,
-              //               ),
-              //               SizedBox(width: 10),
-              //               Text(
-              //                 category,
-              //                 style: TextStyle(
-              //                   fontSize: 16,
-              //                   fontWeight: FontWeight.bold,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //         ...items.map((item) {
-              //           return Row(
-              //             children: [
-              //               Text(
-              //                 item,
-              //                 style: TextStyle(fontSize: 16),
-              //               ),
-              //             ],
-              //           );
-              //         }),
-              //       ];
-              //     }).toList(),
-              //   ),
-              // ),
               // Iterate through all categories and display their items with images
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -350,7 +289,7 @@ class _PlannerFormState extends State<PlannerForm> {
                   height: 550.0, // Set a fixed height for the container
                   child: ListView.builder(
                     physics:
-                        NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
+                        const NeverScrollableScrollPhysics(), // Disable inner ListView scrolling
                     itemCount: additionalData.length,
                     itemBuilder: (context, index) {
                       String category = additionalData.keys.elementAt(index);
@@ -363,7 +302,7 @@ class _PlannerFormState extends State<PlannerForm> {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: Text(
                               category,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -392,7 +331,7 @@ class _PlannerFormState extends State<PlannerForm> {
                                       ),
                                     Text(
                                       item,
-                                      style: TextStyle(fontSize: 12),
+                                      style: const TextStyle(fontSize: 12),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
@@ -400,8 +339,8 @@ class _PlannerFormState extends State<PlannerForm> {
                               );
                             }).toList(),
                           ),
-                          SizedBox(
-                            height: 16.0, // Add spacing between categories
+                          const SizedBox(
+                            height: 16.0,
                           ),
                         ],
                       );
@@ -409,9 +348,9 @@ class _PlannerFormState extends State<PlannerForm> {
                   ),
                 ),
               ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const Divider(),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   "Expense Breakdown",
                   style: TextStyle(
@@ -427,39 +366,39 @@ class _PlannerFormState extends State<PlannerForm> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Food Expense: ",
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
                           "\Lkr ${(double.tryParse(foodExpenseController.text) ?? 0.0).toStringAsFixed(2)} x ${personsController.text} x ${daysController.text}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Transport Expense: ",
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
                           "\Lkr ${(double.tryParse(transportExpenseController.text) ?? 0.0).toStringAsFixed(2)} x ${personsController.text} x ${daysController.text}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Activities Expense: ",
                           style: TextStyle(fontSize: 16),
                         ),
                         Text(
                           "\Lkr ${(double.tryParse(activitiesExpenseController.text) ?? 0.0).toStringAsFixed(2)} x ${personsController.text} x ${daysController.text}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
@@ -469,7 +408,7 @@ class _PlannerFormState extends State<PlannerForm> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Estimated Total Trip Cost: ",
                           style: TextStyle(
                             fontSize: 16,
@@ -478,7 +417,7 @@ class _PlannerFormState extends State<PlannerForm> {
                         ),
                         Text(
                           "\Lkr ${totalTripCost.toStringAsFixed(2)}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -501,7 +440,7 @@ class _PlannerFormState extends State<PlannerForm> {
       padding: const EdgeInsets.only(top: 150.0),
       child: Card(
         elevation: 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -512,86 +451,86 @@ class _PlannerFormState extends State<PlannerForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Weather Predictor & Budget Calculator",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
-              Text(
+              const SizedBox(height: 8),
+              const Text(
                 " ",
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: destinationController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Destination',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.location_pin),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: personsController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Number of persons',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.people),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: daysController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Number of nights',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.nights_stay),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ListTile(
                 title: Text(
                   "${selectedDate.toLocal()}".split(' ')[0],
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                leading: Icon(
+                leading: const Icon(
                   Icons.calendar_today,
                   size: 30,
                 ),
                 onTap: () => _selectDate(context),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               TextFormField(
                 controller: foodExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Food Expense',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.fastfood),
                   suffixText: "LKR",
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: transportExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Transport Expense',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.train),
                   suffixText: "LKR",
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: activitiesExpenseController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Activities Expense',
                   helperText: 'per person per day',
                   border: OutlineInputBorder(),
@@ -599,7 +538,7 @@ class _PlannerFormState extends State<PlannerForm> {
                   suffixText: "LKR",
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -613,11 +552,11 @@ class _PlannerFormState extends State<PlannerForm> {
                       // Fetch weather data for the destination and selected date
                       fetchWeatherData(destination, date);
 
-                      // Calculate total trip cost
-                      calculateTotalCost();
-
                       // Show modal with weather forecast and budget calculation data
                       _showWeatherAndBudgetModal();
+
+                      // Calculate total trip cost
+                      calculateTotalCost();
                     },
                     child: const Text("Try Planner"),
                   ),

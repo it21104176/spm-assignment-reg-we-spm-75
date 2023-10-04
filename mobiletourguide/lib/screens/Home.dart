@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobiletourguide/screens/AddNewPlaces.dart';
 import 'package:mobiletourguide/screens/DisplayPlaces.dart';
 //import 'package:mobiletourguide/screens/UserLocation/userLocation.dart';
-//import 'package:mobiletourguide/screens/pointOfinterest/InterestPlace.dart';
 import 'package:mobiletourguide/widgets/featuredCategories.dart';
 import 'package:mobiletourguide/widgets/header.dart';
 import 'package:mobiletourguide/widgets/search.dart';
@@ -149,8 +148,7 @@ class _HomeState extends State<Home> {
                                                 BorderRadius.circular(10),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  imageUrl), // Use NetworkImage to load the image from a network URL
+                                              image: NetworkImage(imageUrl),
                                             ),
                                           ),
                                         ),
@@ -200,22 +198,6 @@ class _HomeState extends State<Home> {
               //         );
               //       },
               //       child: const Icon(Icons.my_location),
-              //     ),
-              //   ),
-              // ),
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(16.0),
-              //     child: ElevatedButton(
-              //       onPressed: () {
-              //         Navigator.of(context).push(
-              //           MaterialPageRoute(
-              //             builder: (context) => InterestPlace(),
-              //           ),
-              //         );
-              //       },
-              //       child: const Text('Point of Interest'),
               //     ),
               //   ),
               // ),
