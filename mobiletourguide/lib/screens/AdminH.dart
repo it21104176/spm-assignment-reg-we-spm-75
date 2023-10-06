@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobiletourguide/screens/AddNewPlaces.dart';
 
+import '../widgets/header.dart';
+import '../widgets/search.dart';
+
 
 class AdminH extends StatelessWidget {
   @override

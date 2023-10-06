@@ -32,13 +32,16 @@ class _PlannerScreenState extends State<Planner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trip Planner'),
-      ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
+      // appBar: AppBar(
+      //   title: const Text('Trip Planner'),
+      // ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
               width: double.infinity,
               height: 200,
               child: Image.asset(
@@ -46,16 +49,28 @@ class _PlannerScreenState extends State<Planner> {
                 fit: BoxFit.cover,
               ),
             ),
-            PlannerForm(
-              updateWeatherForecast: updateWeatherForecast,
-              updateTotalTripCost: updateTotalTripCost,
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  PlannerForm(
+                    updateWeatherForecast: updateWeatherForecast,
+                    updateTotalTripCost: updateTotalTripCost,
+                  ),
+                  if (weatherForecast.isNotEmpty)
+                    WeatherForecast(weatherForecast: weatherForecast),
+                  if (totalTripCost > 0)
+                    BudgetBreakdown(totalTripCost: totalTripCost),
+                ],
+              ),
             ),
-            if (weatherForecast.isNotEmpty)
-              WeatherForecast(weatherForecast: weatherForecast),
-            if (totalTripCost > 0)
-              BudgetBreakdown(totalTripCost: totalTripCost),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
