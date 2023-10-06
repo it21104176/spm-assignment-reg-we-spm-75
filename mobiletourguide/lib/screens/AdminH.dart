@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobiletourguide/screens/AddNewPlaces.dart';
 
+import '../widgets/header.dart';
+import '../widgets/search.dart';
+
 
 class AdminH extends StatelessWidget {
   @override
@@ -64,23 +67,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   ),
                 );
               },
-
               child: Text('Add New Places'),
-
-              child: const Icon(Icons.logout),
-            )
-          ],
-        ),
-        body: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Header(),
-                const SizedBox(height: 10),
-                const Search(),
-                const SizedBox(height: 10),
-              ],
             ),
           ],
         ),
