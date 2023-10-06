@@ -1,58 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:mobiletourguide/screens/AddNewPlaces.dart';
-import 'package:mobiletourguide/screens/DisplayPlaces.dart';
-//import 'package:mobiletourguide/screens/UserLocation/userLocation.dart';
-//import 'package:mobiletourguide/screens/pointOfinterest/InterestPlace.dart';
-import '../constants/colors.dart';
-import '../services/authservice.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../widgets/header.dart';
-import '../widgets/search.dart';
 
-class AdminH extends StatefulWidget {
-  const AdminH({super.key});
-
-  @override
-  State<AdminH> createState() => _AdminHState();
-}
-
-class _AdminHState extends State<AdminH> {
-  // Create an object from AuthService
-  final AuthService _auth = AuthService();
-
+class AdminH extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Admin Home"),
-          actions: [
-            ElevatedButton(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              child: const Icon(Icons.logout),
-            )
-          ],
-        ),
-        body: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Header(),
-                const SizedBox(height: 10),
-                const Search(),
-                const SizedBox(height: 10),
+      home: AdminProfilePage(),
+    );
+  }
+}
 
-              ],
+class AdminProfilePage extends StatefulWidget {
+  @override
+  _AdminProfilePageState createState() => _AdminProfilePageState();
+}
+
+class _AdminProfilePageState extends State<AdminProfilePage> {
+  // Sample user data
+  String username = "Admin";
+  String email = "admin@example.com";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Admin Profile'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 20),
+            CircleAvatar(
+              radius: 80,
+              // Load the user's profile picture from Firebase Storage or a URL
+              backgroundImage: AssetImage('assets/images/avater.png'),
             ),
-
+            SizedBox(height: 20),
+            Text(
+              'Username: $username',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Email: $email',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddNewPlaces(),
+                  ),
+                );
+              },
+              child: Text('Add New Places'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
