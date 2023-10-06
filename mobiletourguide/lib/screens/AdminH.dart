@@ -64,7 +64,23 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
                   ),
                 );
               },
+
               child: Text('Add New Places'),
+
+              child: const Icon(Icons.logout),
+            )
+          ],
+        ),
+        body: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Header(),
+                const SizedBox(height: 10),
+                const Search(),
+                const SizedBox(height: 10),
+              ],
             ),
           ],
         ),
