@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobiletourguide/screens/AddNewPlaces.dart';
+import 'package:mobiletourguide/screens/AdminH.dart';
 import 'package:mobiletourguide/screens/DisplayPlaces.dart';
 //import 'package:mobiletourguide/screens/UserLocation/userLocation.dart';
 import 'package:mobiletourguide/widgets/featuredCategories.dart';
@@ -71,7 +73,7 @@ class _HomeState extends State<Home> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => DisplayPlaces(),
+                                builder: (context) => AdminH(),
                               ),
                             );
                           },
@@ -88,7 +90,7 @@ class _HomeState extends State<Home> {
                   ),
                   Container(
                     height:
-                        200, // Set the height for your horizontal scrollable section
+                    200, // Set the height for your horizontal scrollable section
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('places')
@@ -99,13 +101,10 @@ class _HomeState extends State<Home> {
                           final List<Widget> favoriteDestinations = [];
 
                           for (final DocumentSnapshot documentSnapshot
-                              in streamSnapshot.data!.docs) {
-                            final String imageUrl = documentSnapshot[
-                                'mainImageUrl']; // Extract imageUrl
-                            final String name =
-                                documentSnapshot['name']; // Extract name
-                            final String placeId =
-                                documentSnapshot.id; // Get the document ID
+                          in streamSnapshot.data!.docs) {
+                            final String imageUrl = documentSnapshot['mainImageUrl']; // Extract imageUrl
+                            final String name = documentSnapshot['name']; // Extract name
+                            final String placeId = documentSnapshot.id; // Get the document ID
 
                             favoriteDestinations.add(
                               GestureDetector(
@@ -134,16 +133,14 @@ class _HomeState extends State<Home> {
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: <Widget>[
                                         Container(
                                           margin: EdgeInsets.all(5),
                                           width: 140,
                                           height: 140,
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(10),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
                                               image: NetworkImage(imageUrl),
@@ -151,13 +148,43 @@ class _HomeState extends State<Home> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              Text(name),
+                                              Text(
+                                                name,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              // Add your rating stars widget here
+                                              // For example, if you are using the Flutter 'flutter_rating_bar' package:
+                                              RatingBar.builder(
+                                                initialRating: 4, // Replace with your rating value
+                                                minRating: 1,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemSize: 16, // Adjust the size of the rating stars
+                                                itemCount: 5,
+                                                itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                                                itemBuilder: (context, _) => Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                                onRatingUpdate: (rating) {
+                                                  // Handle the rating update if needed
+                                                },
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -166,6 +193,9 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
+
+
+
                             );
                           }
 
