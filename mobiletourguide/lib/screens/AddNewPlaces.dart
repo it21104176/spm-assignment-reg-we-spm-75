@@ -4,6 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'dart:io';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -469,7 +476,6 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
   }
 
 
-
   Future<void> _delete(String placeId) async {
     await _places.doc(placeId).delete();
 
@@ -496,11 +502,33 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
       });
     }
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Add New Places')),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: (String choice) {
+              // Handle menu item selection here.
+              if (choice == 'Genarate Report') {
+                Navigator.pop(context); // Close the dialog
+                _generatePdfReport(context); // Navigate to _OutUpdate
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  value: 'Genarate Report',
+                  child: Text('Genarate Report'),
+                ),
+
+              ];
+            },
+          ),
+        ],
       ),
       body: StreamBuilder(
         stream: _places.snapshots(),
@@ -584,7 +612,84 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+
+  Future<void> _generatePdfReport(BuildContext context) async {
+    final pdf = pw.Document();
+
+    // Add a cover page
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            mainAxisAlignment: pw.MainAxisAlignment.center,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            children: [
+              pw.Center(child: pw.Text('Places Report', style: pw.TextStyle(fontSize: 30)),),
+              pw.Center(child: pw.Text('Generated on: ${DateTime.now().toString()}', style: pw.TextStyle(fontSize: 16)),),
+            ],
+          );
+        },
+      ),
+    );
+
+    // Fetch data from Firestore and add it to the PDF
+    final querySnapshot = await _places.get(); // Replace with your Firestore query
+    for (final doc in querySnapshot.docs) {
+      final name = doc['name'];
+      final description = doc['description'];
+      final _visitedPlaces = doc['visitedplaces'];
+      final imageUrl = doc['mainImageUrl']; // Replace with your image URL field
+
+      pdf.addPage(
+        pw.Page(
+          build: (pw.Context context) {
+            return pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                // Place name
+                pw.Center(child: pw.Text('$name', style: pw.TextStyle(fontSize: 28, fontWeight: pw.FontWeight.bold)),),
+                pw.SizedBox(height: 10),
+
+                // Description
+                pw.Text('$description', style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.normal, color: PdfColors.black)),
+                pw.SizedBox(height: 20),
+
+                pw.Center(child: pw.Text('Visited Places', style: pw.TextStyle(fontSize: 28, fontWeight: pw.FontWeight.bold)),),
+                pw.SizedBox(height: 10),
+                // Visited places
+                pw.Text('$_visitedPlaces', style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.normal, color: PdfColors.black)),
+
+                // Page break
+                pw.SizedBox(height: 10),
+              ],
+            );
+          },
+        ),
+      );
+    }
+
+    // Save the PDF to a file
+    final output = await getTemporaryDirectory();
+    final pdfFile = File('${output.path}/your_report.pdf');
+    await pdfFile.writeAsBytes(await pdf.save());
+
+    // Display the PDF summary using flutter_pdfview
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Scaffold(
+        appBar: AppBar(title: Text('PDF Summary')),
+        body: PDFView(
+          filePath: pdfFile.path,
+          // You can add more options and configurations here
+        ),
+      ),
+    ));
+  }
+
+
+
 }
+
 
 
 class PlaceDetailsPage extends StatelessWidget {

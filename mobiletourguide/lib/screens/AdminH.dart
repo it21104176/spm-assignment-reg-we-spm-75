@@ -69,9 +69,13 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
               },
               child: Text('Add New Places'),
             ),
+            SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
+
+
+
 }
