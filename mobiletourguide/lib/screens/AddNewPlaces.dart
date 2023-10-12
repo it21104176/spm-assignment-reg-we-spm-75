@@ -203,7 +203,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                           child: TextFormField(
                             controller: _servicesController,
                             decoration: InputDecoration(
-                              labelText: 'More Services ',
+                              labelText: 'More Activities ',
                               labelStyle: TextStyle(fontSize: 18),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -406,7 +406,7 @@ class _AddNewPlaceState extends State<AddNewPlaces> {
                           child: TextFormField(
                             controller: _servicesController,
                             decoration: InputDecoration(
-                              labelText: 'More Service ',
+                              labelText: 'More Activities ',
                               labelStyle: TextStyle(fontSize: 18),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -769,7 +769,7 @@ class PlaceDetailsPage extends StatelessWidget {
                         SizedBox(height: 12.0),
                         // Display the services
                         const Text(
-                          'More Services  ',
+                          'More Activities  ',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
