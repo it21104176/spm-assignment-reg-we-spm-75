@@ -13,7 +13,10 @@ import firebase_database
 import firebase_storage
 import geolocator_apple
 import path_provider_foundation
+<<<<<<< HEAD
+=======
 import share_plus
+>>>>>>> db837fd0624fbabea8a6ab3024d8dcd97806760e
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
@@ -25,6 +28,9 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseStoragePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseStoragePlugin"))
   GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
+<<<<<<< HEAD
+=======
   SharePlusMacosPlugin.register(with: registry.registrar(forPlugin: "SharePlusMacosPlugin"))
+>>>>>>> db837fd0624fbabea8a6ab3024d8dcd97806760e
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
 }
