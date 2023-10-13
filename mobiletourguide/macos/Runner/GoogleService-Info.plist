@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBx8f7jPRMd3jmUttP2FZOT7D4QySXde3I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1097618524829</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mobiletourguide.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>tourguide-bb7a2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tourguide-bb7a2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1097618524829:ios:6c2beda771c83ea0dd6274</string>
+	<key>DATABASE_URL</key>
+	<string>https://tourguide-bb7a2-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

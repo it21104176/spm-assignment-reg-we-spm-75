@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../services/authservice.dart';
+import 'package:mobiletourguide/screens/user_profile/user_profile_screen.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,8 +21,13 @@ class _HomeState extends State<Home> {
           title: const Text("Home"),
           actions: [
             ElevatedButton(
-              onPressed: () async {
-                await _auth.signOut();
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const UserProfile(),
+                    ),
+                );
               },
               child: const Icon(Icons.logout),
             )
